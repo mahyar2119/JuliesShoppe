@@ -80,22 +80,50 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ background:"var(--bg)",color:"var(--text)" }}>
-      <header className="border-b px-4 py-4 flex items-center justify-between glass"
-        style={{ borderColor:"var(--border)" }}>
-        <div className="flex items-center gap-3">
-          <Link href="/" style={{ color:"var(--text2)" }}><ArrowRight size={18}/></Link>
-          <Image src="/logo.png" alt="Julie's Shoppe" width={90} height={24} className="object-contain"
-            style={{ filter:theme==="light"?"invert(1) brightness(0.3)":"brightness(1)" }}/>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-xs px-2 py-1 rounded-lg" style={{ background:"var(--shine)",color:"var(--blue)" }}>Admin</span>
-          <button onClick={toggle} className="w-8 h-8 flex items-center justify-center rounded-full border"
-            style={{ borderColor:"var(--border2)",color:"var(--text2)" }}>
-            {theme==="dark"?<Sun size={13}/>:<Moon size={13}/>}
-          </button>
-        </div>
-      </header>
+  <div className="min-h-screen" style={{ background: "var(--bg)", color: "var(--text)" }}>
+    
+    <header
+      className="border-b px-4 py-4 flex items-center justify-between glass"
+      style={{ borderColor: "var(--border)" }}
+    >
+      
+      <div className="flex items-center gap-3">
+        <Link href="/" style={{ color: "var(--text2)" }}>
+          <ArrowRight size={18} />
+        </Link>
+
+        <Image
+          src="/logo.png"
+          alt="Julie's Shoppe"
+          width={110}
+          height={30}
+          className="object-contain"
+          style={{
+            filter: "none",
+            background: "transparent"
+          }}
+          priority
+        />
+      </div>
+
+      <div className="flex items-center gap-2">
+        <span
+          className="text-xs px-2 py-1 rounded-lg"
+          style={{ background: "var(--shine)", color: "var(--blue)" }}
+        >
+          Admin
+        </span>
+
+        <button
+          onClick={toggle}
+          className="w-8 h-8 flex items-center justify-center rounded-full border"
+          style={{ borderColor: "var(--border2)", color: "var(--text2)" }}
+        >
+          {theme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
+        </button>
+      </div>
+
+    </header>
 
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Stale alert */}
