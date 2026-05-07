@@ -68,9 +68,9 @@ export default function Navbar({ searchValue = "", onSearch, activePage }: Props
           {/* Logo */}
           <Link href="/" style={{ textDecoration: "none", flexShrink: 0 }}>
             <Image src="/logo.png" alt="Julie's Shoppe" width={100} height={26}
-              style={{ objectFit: "contain" }} priority />
+              style={{ objectFit: "contain", filter: "none" }} priority />
           </Link>
-
+ 
           {/* Desktop Search */}
           {onSearch && (
             <div className="hidden lg:block flex-1 max-w-xs mx-2">
