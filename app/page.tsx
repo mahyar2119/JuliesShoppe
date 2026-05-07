@@ -27,7 +27,11 @@ export default function Home() {
               alt="Julie's Shoppe"
               width={220}
               height={56}
-              style={{ filter: "invert(1) brightness(0.08)", objectFit: "contain", margin: "0 auto", display: "block" }}
+              style={{
+  objectFit: "contain",
+  margin: "0 auto",
+  display: "block"
+}}
               priority
             />
           </div>
