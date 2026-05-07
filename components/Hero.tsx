@@ -53,7 +53,7 @@ export default function Hero({ onOrder }: Props) {
           {/* Left */}
           <div className="fade-up">
             <div className="mb-8">
-              <Image src="/logo.png" alt="Julie's Shoppe" width={260} height={66}
+              <Image src="/logo.png" alt="Julie's Shoppe" width={360} height={90}
                 style={{ filter:"invert(1) brightness(0.08)", objectFit:"contain" }} priority />
             </div>
 
