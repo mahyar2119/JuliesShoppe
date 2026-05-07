@@ -14,27 +14,39 @@ export default function Home() {
   const [showOrder, setShowOrder] = useState(false);
 
   return (
-    <main dir={dir} style={{ minHeight: "100vh" }}>
-      <Navbar activePage="home" />
-      {showOrder && <OrderModal onClose={() => setShowOrder(false)} />}
+  <main dir={dir} style={{ minHeight: "100vh" }}>
+    <Navbar activePage="home" />
+    {showOrder && <OrderModal onClose={() => setShowOrder(false)} />}
 
-      {/* ── CENTERED HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 1.5rem" }}>
-        <div className="fade-up text-center" style={{ maxWidth: 540 }}>
-          <div style={{ marginBottom: "2.5rem" }}>
-            <Image
-              src="/logo.png"
-              alt="Julie's Shoppe"
-              width={600}
-              height={150}
-              style={{
-  objectFit: "contain",
-  margin: "0 auto",
-  display: "block"
-}}
-              priority
-            />
-          </div>
+    {/* ── CENTERED HERO ── */}
+    <section
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "0 1.5rem",
+      }}
+    >
+      <div className="fade-up text-center" style={{ maxWidth: 540 }}>
+        
+        <div style={{ marginBottom: "2.5rem" }}>
+          <Image
+            src="/logo.png"
+            alt="Julie's Shoppe"
+            width={360}
+            height={90}
+            className="object-contain"
+            style={{
+              margin: "0 auto",
+              display: "block",
+              background: "transparent"
+            }}
+            priority
+          />
+        </div>
+
+      
 
           <p className="text-sm" style={{ ...ff, color: "var(--ink-2)", lineHeight: "1.9", maxWidth: 420, margin: "0 auto 2.5rem" }}>
             {isFa
