@@ -25,8 +25,8 @@ export default function Home() {
             <Image
               src="/logo.png"
               alt="Julie's Shoppe"
-              width={220}
-              height={56}
+              width={600}
+              height={150}
               style={{
   objectFit: "contain",
   margin: "0 auto",
