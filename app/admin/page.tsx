@@ -99,7 +99,7 @@ export default function AdminPage() {
   height={1}
   className="object-contain"
   style={{
-    width: "180px",
+    width: "300px",
     height: "auto"
   }}
   priority
