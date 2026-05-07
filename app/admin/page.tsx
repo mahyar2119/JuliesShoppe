@@ -93,17 +93,17 @@ export default function AdminPage() {
         </Link>
 
         <Image
-          src="/logo.png"
-          alt="Julie's Shoppe"
-          width={110}
-          height={30}
-          className="object-contain"
-          style={{
-            filter: "none",
-            background: "transparent"
-          }}
-          priority
-        />
+  src="/logo.png"
+  alt="Julie's Shoppe"
+  width={1}
+  height={1}
+  className="object-contain"
+  style={{
+    width: "180px",
+    height: "auto"
+  }}
+  priority
+/>
       </div>
 
       <div className="flex items-center gap-2">
