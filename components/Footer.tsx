@@ -7,76 +7,77 @@ import Link from "next/link";
 
 export default function Footer() {
   const { lang, dir } = useLang();
-  const ff = { fontFamily: lang === "fa" ? "Vazirmatn,sans-serif" : "Sora,sans-serif" };
+  const ff   = { fontFamily: lang === "fa" ? "Vazirmatn,sans-serif" : "Sora,sans-serif" };
   const isFa = lang === "fa";
 
-  const label: React.CSSProperties = {
-    fontSize: 9,
-    fontWeight: 600,
-    letterSpacing: "0.38em",
-    textTransform: "uppercase",
-    color: "rgba(255,255,255,0.30)",
-    marginBottom: "1.4rem",
-    display: "block",
-  };
-
-  const link: React.CSSProperties = {
-    ...ff,
-    fontSize: 12,
-    color: "rgba(255,255,255,0.45)",
-    textDecoration: "none",
-    display: "block",
-    marginBottom: "0.7rem",
-    transition: "color 0.16s",
-    letterSpacing: "0.02em",
-  };
-
   return (
-    <footer style={{ background: "#111111", color: "#e8e6e1" }}>
-      <div style={{ height: 1, background: "rgba(255,255,255,0.06)" }} />
+    <footer style={{ background: "#f0ece6", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
 
       <div className="max-w-7xl mx-auto px-8 py-16" dir={dir}>
         <div className="grid md:grid-cols-3 gap-12 mb-12">
 
+          {/* Brand */}
           <div>
             <Image
               src="/logo.png"
               alt="Julie's Shoppe"
               width={120}
               height={30}
-              style={{ filter: "invert(1) brightness(0.85)", objectFit: "contain", marginBottom: "1.5rem", opacity: 0.70 }}
+              style={{ objectFit: "contain", marginBottom: "1.25rem", opacity: 0.75 }}
             />
-            <p style={{ ...ff, fontSize: 12, color: "rgba(255,255,255,0.30)", lineHeight: "2", fontWeight: 300 }}>
+            <p style={{ ...ff, fontSize: 12, color: "#7a7065", lineHeight: "2", fontWeight: 300 }}>
               {isFa
                 ? "خرید مستقیم از بهترین برندهای ترکیه با ارسال سریع به ایران"
                 : "Direct shopping from Turkey's finest brands with fast delivery to Iran"}
             </p>
           </div>
 
+          {/* Navigation */}
           <div>
-            <span style={label}>{isFa ? "صفحات" : "Navigation"}</span>
-            {[
-              { fa: "خانه",     en: "Home",     href: "/" },
-              { fa: "برندها",   en: "Brands",   href: "/brands" },
-              { fa: "محصولات", en: "Products", href: "/products" },
-              { fa: "درباره ما", en: "About",  href: "/about" },
-            ].map(l => (
-              <Link key={l.fa} href={l.href} style={link} className="hover:!text-white/70">
-                {isFa ? l.fa : l.en}
-              </Link>
-            ))}
+            <p style={{
+              fontSize: 9, fontWeight: 600, letterSpacing: "0.38em",
+              textTransform: "uppercase", color: "#a09484",
+              marginBottom: "1.25rem", ...ff,
+            }}>
+              {isFa ? "صفحات" : "Navigation"}
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+              {[
+                { fa: "خانه",     en: "Home",     href: "/" },
+                { fa: "برندها",   en: "Brands",   href: "/brands" },
+                { fa: "محصولات", en: "Products", href: "/products" },
+                { fa: "درباره ما", en: "About",  href: "/about" },
+              ].map(l => (
+                <Link
+                  key={l.fa}
+                  href={l.href}
+                  style={{ ...ff, fontSize: 13, color: "#4a4540", textDecoration: "none", transition: "color 0.16s" }}
+                  className="hover:!text-[#111]"
+                >
+                  {isFa ? l.fa : l.en}
+                </Link>
+              ))}
+            </div>
           </div>
 
+          {/* Contact */}
           <div>
-            <span style={label}>{isFa ? "تماس" : "Contact"}</span>
+            <p style={{
+              fontSize: 9, fontWeight: 600, letterSpacing: "0.38em",
+              textTransform: "uppercase", color: "#a09484",
+              marginBottom: "1.25rem", ...ff,
+            }}>
+              {isFa ? "تماس" : "Contact"}
+            </p>
             <a
               href={`https://t.me/${TELEGRAM_USERNAME}`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ ...link, display: "flex", alignItems: "center", gap: 6 }}
-              className="hover:!text-white/70"
+              style={{ ...ff, fontSize: 13, color: "#4a4540", textDecoration: "none", display: "flex", alignItems: "center", gap: 7, marginBottom: "1.25rem", transition: "color 0.16s" }}
+              className="hover:!text-[#111]"
             >
-              <Send size={11} />@{TELEGRAM_USERNAME}
+              <Send size={12} />
+              @{TELEGRAM_USERNAME}
             </a>
             <a
               href={`https://t.me/${TELEGRAM_USERNAME}`}
@@ -84,29 +85,31 @@ export default function Footer() {
               rel="noopener noreferrer"
               style={{
                 ...ff,
-                marginTop: "1rem",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 7,
-                padding: "10px 20px",
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "rgba(255,255,255,0.60)",
+                padding: "10px 22px",
+                background: "#111",
+                color: "#fff",
                 fontSize: 11,
-                letterSpacing: "0.07em",
+                fontWeight: 500,
+                letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 textDecoration: "none",
-                transition: "border-color 0.18s, color 0.18s",
+                transition: "background 0.18s",
               }}
+              onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.background = "#2a2a2a")}
+              onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.background = "#111")}
             >
               <Send size={11} />
-              {isFa ? "سفارش در تلگرام" : "Order via Telegram"}
+              {isFa ? "سفارش و پشتیبانی" : "Order & Support"}
             </a>
           </div>
         </div>
 
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "1.5rem", textAlign: "center" }}>
-          <p style={{ ...ff, fontSize: 11, color: "rgba(255,255,255,0.18)", letterSpacing: "0.04em" }}>
+        {/* Bottom bar */}
+        <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: "1.5rem", textAlign: "center" }}>
+          <p style={{ ...ff, fontSize: 11, color: "#a09484", letterSpacing: "0.04em" }}>
             © 2025 Julie&apos;s Shoppe
             {isFa ? " — تمام حقوق محفوظ است" : " — All rights reserved"}
           </p>
