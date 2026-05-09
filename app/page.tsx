@@ -14,47 +14,66 @@ export default function Home() {
   const [showOrder, setShowOrder] = useState(false);
 
   return (
-  <main dir={dir} style={{ minHeight: "100vh" }}>
-    <Navbar activePage="home" />
-    {showOrder && <OrderModal onClose={() => setShowOrder(false)} />}
+    <main dir={dir} style={{ minHeight: "100vh" }}>
+      <Navbar activePage="home" />
+      {showOrder && <OrderModal onClose={() => setShowOrder(false)} />}
 
-    {/* ── CENTERED HERO ── */}
-    <section
-      style={{
+      {/* ── HERO ── */}
+      <section style={{
         minHeight: "100vh",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "0 1.5rem",
-      }}
-    >
-      <div className="fade-up text-center" style={{ maxWidth: 540 }}>
-        
-        <div style={{ marginBottom: "2.5rem" }}>
-          <Image
-            src="/logo.png"
-            alt="Julie's Shoppe"
-            width={360}
-            height={90}
-            className="object-contain"
-            style={{
-              margin: "0 auto",
-              display: "block",
-              background: "transparent"
-            }}
-            priority
-          />
-        </div>
+        padding: "0 2rem",
+        gap: 0,
+      }}>
+        <div className="fade-up" style={{ textAlign: "center", maxWidth: 560 }}>
 
-      
-
-          <p className="text-sm" style={{ ...ff, color: "var(--ink-2)", lineHeight: "1.9", maxWidth: 420, margin: "0 auto 2.5rem" }}>
-            {isFa
-              ? "خرید مستقیم از بهترین برندهای ترکیه — پوشاک، کفش، الکترونیک، لوازم خانگی و بیشتر. ارسال سریع و مطمئن به سراسر ایران."
-              : "Direct shopping from Turkey's finest brands — fashion, shoes, electronics, home goods and more. Fast, reliable delivery to Iran."}
+          {/* Eyebrow */}
+          <p className="section-label" style={{ ...ff, marginBottom: "2.8rem" }}>
+            {isFa ? "خرید مستقیم از ترکیه" : "Direct from Turkey"}
           </p>
 
-          <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+          {/* Logo */}
+          <div style={{ marginBottom: "3.5rem" }}>
+            <Image
+              src="/logo.png"
+              alt="Julie's Shoppe"
+              width={360}
+              height={90}
+              style={{
+                filter: "invert(1) brightness(0.05)",
+                objectFit: "contain",
+                margin: "0 auto",
+                display: "block",
+                maxWidth: "100%",
+                height: "auto",
+              }}
+              priority
+            />
+          </div>
+
+          {/* Thin rule */}
+          <div style={{ width: 40, height: 1, background: "var(--border-mid)", margin: "0 auto 3rem" }} />
+
+          {/* Description */}
+          <p style={{
+            ...ff,
+            color: "var(--ink-2)",
+            lineHeight: "2",
+            fontSize: "14px",
+            maxWidth: 400,
+            margin: "0 auto 3.5rem",
+            fontWeight: 300,
+          }}>
+            {isFa
+              ? "پوشاک، کفش، الکترونیک و لوازم خانگی — مستقیم از بهترین برندهای ترکیه با ارسال مطمئن به سراسر ایران."
+              : "Fashion, shoes, electronics and home goods — sourced directly from Turkey's finest brands, delivered reliably to Iran."}
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display: "flex", gap: "0.875rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/brands" className="btn-accent" style={ff}>
               {isFa ? "مشاهده برندها" : "Browse Brands"}
             </Link>
@@ -62,6 +81,24 @@ export default function Home() {
               {isFa ? "ثبت سفارش" : "Place an Order"}
             </button>
           </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div style={{
+          position: "absolute",
+          bottom: "2.5rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 6,
+          opacity: 0.3,
+        }}>
+          <div style={{ width: 1, height: 40, background: "var(--ink)" }} />
+          <p style={{ fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--ink)", fontFamily: "Sora,sans-serif" }}>
+            {isFa ? "پایین" : "scroll"}
+          </p>
         </div>
       </section>
 

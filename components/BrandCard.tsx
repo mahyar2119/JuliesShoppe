@@ -69,7 +69,7 @@ function BrandLogo({ brand }: { brand: TurkishBrand }) {
   }
   return (
     <div style={{
-      width: 44, height: 44, borderRadius: 10, background: "#fff",
+      width: 44, height: 44, borderRadius: 10, background: "#ffffff",
       border: "1px solid rgba(220,228,240,0.8)", display: "flex",
       alignItems: "center", justifyContent: "center", overflow: "hidden",
       boxShadow: "0 2px 10px rgba(13,35,64,0.08)",
