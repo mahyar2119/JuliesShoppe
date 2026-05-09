@@ -3,7 +3,7 @@ import "./globals.css";
 import { StoreProvider } from "@/lib/context";
 import { LangProvider } from "@/lib/lang";
 import { ThemeProvider } from "@/lib/theme";
-import IranBackground from "@/components/IranBackground";
+
 
 export const metadata: Metadata = {
   title: "Julie's Shoppe | خرید از ترکیه",
@@ -23,7 +23,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#f7f5f2" />
       </head>
       <body>
-        <IranBackground />
         <ThemeProvider><LangProvider><StoreProvider>{children}</StoreProvider></LangProvider></ThemeProvider>
       </body>
     </html>
