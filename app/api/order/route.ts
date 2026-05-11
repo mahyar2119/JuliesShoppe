@@ -1,3 +1,7 @@
+export async function GET() {
+  return Response.json({ ok: true });
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -27,6 +31,6 @@ export async function POST(req: Request) {
 
     return Response.json({ success: true });
   } catch (error) {
-    return Response.json({ success: false, error });
+    return Response.json({ success: false });
   }
 }
