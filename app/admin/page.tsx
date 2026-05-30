@@ -4,7 +4,7 @@ import { useStore } from "@/lib/context";
 import { useTheme } from "@/lib/theme";
 import { Product, VideoItem, Brand, Gender, AgeGroup, GENDER_LABELS, AGE_LABELS } from "@/lib/store";
 import { formatTRY, withMarkup } from "@/lib/currency";
-import { Plus, Trash2, Edit2, Save, X, Video, Package, ArrowRight, AlertTriangle, ExternalLink, Sun, Moon, Tag, Film } from "lucide-react";
+import { Plus, Trash2, Edit2, Save, X, Video, Package, ArrowRight, AlertTriangle, ExternalLink, Sun, Moon, Tag, Film, Send } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -23,13 +23,14 @@ const EMPTY_B: Brand = { id:"",name:"",color:"#1a1a2e",domain:"" };
 type Tab = "products"|"videos"|"brands"|"settings";
 
 export default function AdminPage() {
-  const { products,videos,brands,heroVideoUrl,setHeroVideoUrl,addProduct,updateProduct,deleteProduct,addVideo,deleteVideo,addBrand,updateBrand,deleteBrand } = useStore();
+  const { products,videos,brands,heroVideoUrl,setHeroVideoUrl,telegramUsername,setTelegramUsername,addProduct,updateProduct,deleteProduct,addVideo,deleteVideo,addBrand,updateBrand,deleteBrand } = useStore();
   const { theme, toggle } = useTheme();
   const [tab,setTab]       = useState<Tab>("products");
   const [pForm,setPForm]   = useState<Product>(EMPTY_P);
   const [vForm,setVForm]   = useState<VideoItem>(EMPTY_V);
   const [bForm,setBForm]   = useState<Brand>(EMPTY_B);
-  const [heroInput,setHeroInput] = useState(heroVideoUrl);
+  const [heroInput,setHeroInput]   = useState(heroVideoUrl);
+  const [tgInput,setTgInput]       = useState(telegramUsername);
   const [vType,setVType]   = useState<"youtube"|"mp4">("youtube");
   const [editP,setEditP]   = useState<string|null>(null);
   const [editB,setEditB]   = useState<string|null>(null);
@@ -37,6 +38,7 @@ export default function AdminPage() {
   const [showV,setShowV]   = useState(false);
   const [showB,setShowB]   = useState(false);
   const [saved,setSaved]   = useState(false);
+  const [tgSaved,setTgSaved] = useState(false);
 
   useEffect(()=>{ document.documentElement.setAttribute("data-theme",theme); },[theme]);
 
@@ -66,6 +68,7 @@ export default function AdminPage() {
   const startEditB = (b:Brand)=>{ setBForm(b);setEditB(b.id);setShowB(true); };
 
   const saveHero = ()=>{ setHeroVideoUrl(heroInput); setSaved(true); setTimeout(()=>setSaved(false),2000); };
+  const saveTg   = ()=>{ setTelegramUsername(tgInput.replace("@","")); setTgSaved(true); setTimeout(()=>setTgSaved(false),2000); };
 
   const cs = { background:"var(--bg2)", borderColor:"var(--border)" };
   const fs = { background:"var(--bg2)", borderColor:"var(--border2)" };
@@ -80,50 +83,22 @@ export default function AdminPage() {
   ];
 
   return (
-  <div className="min-h-screen" style={{ background: "var(--bg)", color: "var(--text)" }}>
-    
-    <header
-      className="border-b px-4 py-4 flex items-center justify-between glass"
-      style={{ borderColor: "var(--border)" }}
-    >
-      
-      <div className="flex items-center gap-3">
-        <Link href="/" style={{ color: "var(--text2)" }}>
-          <ArrowRight size={18} />
-        </Link>
-
-        <Image
-  src="/logo.png"
-  alt="Julie's Shoppe"
-  width={1}
-  height={1}
-  className="object-contain"
-  style={{
-    width: "300px",
-    height: "auto"
-  }}
-  priority
-/>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span
-          className="text-xs px-2 py-1 rounded-lg"
-          style={{ background: "var(--shine)", color: "var(--blue)" }}
-        >
-          Admin
-        </span>
-
-        <button
-          onClick={toggle}
-          className="w-8 h-8 flex items-center justify-center rounded-full border"
-          style={{ borderColor: "var(--border2)", color: "var(--text2)" }}
-        >
-          {theme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
-        </button>
-      </div>
-
-    </header>
+    <div className="min-h-screen" style={{ background:"var(--bg)",color:"var(--text)" }}>
+      <header className="border-b px-4 py-4 flex items-center justify-between glass"
+        style={{ borderColor:"var(--border)" }}>
+        <div className="flex items-center gap-3">
+          <Link href="/" style={{ color:"var(--text2)" }}><ArrowRight size={18}/></Link>
+          <Image src="/logo.png" alt="Julie's Shoppe" width={90} height={24} className="object-contain"
+            style={{ filter:theme==="light"?"invert(1) brightness(0.3)":"brightness(1)" }}/>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs px-2 py-1 rounded-lg" style={{ background:"var(--shine)",color:"var(--blue)" }}>Admin</span>
+          <button onClick={toggle} className="w-8 h-8 flex items-center justify-center rounded-full border"
+            style={{ borderColor:"var(--border2)",color:"var(--text2)" }}>
+            {theme==="dark"?<Sun size={13}/>:<Moon size={13}/>}
+          </button>
+        </div>
+      </header>
 
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Stale alert */}
@@ -461,27 +436,48 @@ export default function AdminPage() {
 
         {/* ── SETTINGS ── */}
         {tab==="settings"&&(
-          <div>
-            <h2 className="text-base fa mb-6" style={{ ...ff,color:"var(--text2)" }}>تنظیمات سایت</h2>
+          <div className="space-y-5">
+            <h2 className="text-base fa" style={{ ...ff,color:"var(--text2)" }}>تنظیمات سایت</h2>
             <div className="p-5 rounded-2xl border" style={fs}>
-              <div className="flex items-center gap-2 mb-4">
-                <Film size={16} style={{ color:"var(--blue)" }}/>
-                <h3 className="text-sm font-bold fa" style={{ ...ff,color:"var(--text)" }}>ویدیوی پس‌زمینه هیرو</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <Send size={16} style={{ color:"var(--blue)" }}/>
+                <h3 className="text-sm font-bold fa" style={{ ...ff,color:"var(--text)" }}>تلگرام</h3>
+                {telegramUsername && (
+                  <a href={`https://t.me/${telegramUsername}`} target="_blank" rel="noopener noreferrer"
+                    className="text-[10px] px-2 py-0.5 rounded-lg" style={{ background:"var(--shine)",color:"var(--blue)" }}>
+                    @{telegramUsername} ↗
+                  </a>
+                )}
               </div>
               <p className="text-[11px] mb-3 fa" style={{ ...ff,color:"var(--text3)" }}>
-                لینک مستقیم MP4 یا هر ویدیوی فشن را اینجا وارد کن تا در پس‌زمینه صفحه اصلی پخش شود.
+                username تلگرام خودت رو اینجا وارد کن (بدون @). وقتی مشتری دکمه سفارش رو بزنه مستقیم پیام میده.
               </p>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm" style={{ color:"var(--text3)" }}>@</span>
+                  <input value={tgInput} onChange={e=>setTgInput(e.target.value.replace("@",""))}
+                    placeholder="julies_shoppe" dir="ltr"
+                    className={inp+" pr-8"} style={inpStyle}/>
+                </div>
+                <button onClick={saveTg} className="gradient-btn flex items-center gap-2 text-white text-sm font-bold px-4 py-2.5 rounded-xl fa" style={ff}>
+                  <Save size={13}/>{tgSaved?"ذخیره شد ✓":"ذخیره"}
+                </button>
+              </div>
+              <p className="text-[10px] mt-2 fa" style={{ ...ff,color:"var(--text3)" }}>
+                ⚠️ اگر username نداری: تلگرام ← Settings ← Username رو تنظیم کن
+              </p>
+            </div>
+            <div className="p-5 rounded-2xl border" style={fs}>
+              <div className="flex items-center gap-2 mb-3">
+                <Film size={16} style={{ color:"var(--purple)" }}/>
+                <h3 className="text-sm font-bold fa" style={{ ...ff,color:"var(--text)" }}>ویدیوی پس‌زمینه</h3>
+              </div>
               <input value={heroInput} onChange={e=>setHeroInput(e.target.value)}
                 placeholder="https://cdn.example.com/fashion.mp4" dir="ltr"
                 className={inp+" mb-3"} style={inpStyle}/>
-              <div className="flex gap-2">
-                <button onClick={saveHero} className="gradient-btn flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-xl fa" style={ff}>
-                  <Save size={13}/>{saved?"ذخیره شد! ✓":"ذخیره"}
-                </button>
-              </div>
-              <p className="text-[10px] mt-3 fa" style={{ ...ff,color:"var(--text3)" }}>
-                💡 پیشنهاد: از Coverr.co یا Pexels.com ویدیوی رایگان فشن دانلود کن، آپلود کن روی Cloudinary یا Dropbox، لینک مستقیم را اینجا وارد کن.
-              </p>
+              <button onClick={saveHero} className="gradient-btn flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-xl fa" style={ff}>
+                <Save size={13}/>{saved?"ذخیره شد ✓":"ذخیره"}
+              </button>
             </div>
           </div>
         )}

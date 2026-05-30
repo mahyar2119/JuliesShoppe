@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Product, IRAN_HASHTAGS, TELEGRAM_USERNAME } from "@/lib/store";
+import { Product, IRAN_HASHTAGS } from "@/lib/store";
 import { formatTRY, withMarkup } from "@/lib/currency";
 import { X, Copy, Check } from "lucide-react";
 import { useLang } from "@/lib/lang";
 
-interface Props { product: Product; onClose: () => void; }
+interface Props { product: Product; onClose: () => void; telegramUsername: string; }
 
-export default function InstagramCard({ product, onClose }: Props) {
+export default function InstagramCard({ product, onClose, telegramUsername }: Props) {
   const { lang } = useLang();
   const [copied, setCopied] = useState(false);
   const ff = { fontFamily: lang==="fa"?"Vazirmatn,sans-serif":"DM Sans,sans-serif" };
@@ -20,7 +20,7 @@ export default function InstagramCard({ product, onClose }: Props) {
   const caption =
     `✨ ${product.name}\n🏷 ${product.brand}\n\n` +
     `💰 قیمت اصلی: ${originalTRY}\n🛍 قیمت شما: ${myPrice}\n\n` +
-    `📲 سفارش در تلگرام: @${TELEGRAM_USERNAME}\n\n${hashtags}`;
+    `📲 سفارش در تلگرام: @${telegramUsername}\n\n${hashtags}`;
 
   const copyCaption = async () => {
     await navigator.clipboard.writeText(caption);
@@ -56,7 +56,7 @@ export default function InstagramCard({ product, onClose }: Props) {
               <p className="text-white text-[10px] font-semibold mt-0.5">{product.name}</p>
               <p className="text-[9px] line-through mt-1" style={{ color:"rgba(255,255,255,0.5)" }}>{originalTRY}</p>
               <p className="text-white text-sm font-bold">{myPrice}</p>
-              <p className="text-[8px] mt-1" style={{ color:"rgba(155,92,255,0.9)" }}>@{TELEGRAM_USERNAME}</p>
+              <p className="text-[8px] mt-1" style={{ color:"rgba(155,92,255,0.9)" }}>@{telegramUsername}</p>
             </div>
           </div>
         </div>

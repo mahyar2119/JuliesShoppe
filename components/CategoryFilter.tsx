@@ -13,7 +13,7 @@ const GENDERS: (Gender | "all")[] = ["all","female","male","children"];
 
 export default function CategoryFilter({ gender, ageGroup, onGender, onAge }: Props) {
   const { lang } = useLang();
-  const ff = { fontFamily: lang==="fa"?"Vazirmatn,sans-serif":"Sora,sans-serif" };
+  const ff = { fontFamily: lang==="fa"?"Vazirmatn,sans-serif":"DM Sans,sans-serif" };
 
   const genderLabel = (g: Gender | "all") => {
     if (g==="all") return lang==="fa" ? "همه" : "All";
