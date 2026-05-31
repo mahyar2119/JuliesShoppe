@@ -59,9 +59,9 @@ function BrandLogo({ brand }: { brand: TurkishBrand }) {
     return (
       <div style={{
         width: 44, height: 44, borderRadius: 10, display: "flex", alignItems: "center",
-        justifyContent: "center", background: brand.color, color: "#fff",
+        justifyContent: "center", background: "#1a1a2e", color: "#fff",
         fontWeight: 800, fontSize: 18, fontFamily: "Sora,sans-serif",
-        boxShadow: `0 4px 14px ${brand.color}44`,
+        boxShadow: `0 4px 14px ${"#1a1a2e"}44`,
       }}>
         {brand.name[0]}
       </div>
@@ -85,7 +85,7 @@ function BrandLogo({ brand }: { brand: TurkishBrand }) {
           target.style.display = "none";
           const parent = target.parentElement;
           if (parent) {
-            parent.style.background = brand.color;
+            parent.style.background = "#1a1a2e";
             parent.innerHTML = `<span style="color:#fff;font-weight:800;font-size:16px;font-family:Sora,sans-serif">${brand.name[0]}</span>`;
           }
         }}
@@ -96,7 +96,7 @@ function BrandLogo({ brand }: { brand: TurkishBrand }) {
 
 // Per-brand design styles
 function getBrandStyle(brand: TurkishBrand): React.CSSProperties {
-  const c = brand.color;
+  const c = "#1a1a2e";
   return {
     borderTop: `3px solid ${c}`,
     background: `linear-gradient(160deg, ${c}0a 0%, rgba(255,255,255,0.90) 60%)`,
