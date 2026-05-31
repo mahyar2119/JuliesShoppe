@@ -78,3 +78,44 @@ export const defaultBrands: Brand[] = [
 export const defaultProducts: Product[] = [];
 
 export const defaultVideos: VideoItem[] = [];
+
+export type BrandCategory = "all" | "fashion" | "shoes" | "bags" | "electronics" | "sports" | "beauty" | "home" | "kids" | "accessories" | "eyewear" | "auto" | "food";
+
+export interface TurkishBrand {
+  id: string; name: string; nameFa: string; descFa: string; descEn: string;
+  logo: string; url: string; categories: BrandCategory[]; featured: boolean; color?: string;
+}
+
+export const BRAND_CATEGORIES = [
+  { key: "all" as BrandCategory,         labelFa: "همه",       labelEn: "All",         icon: "🛍" },
+  { key: "fashion" as BrandCategory,     labelFa: "پوشاک",     labelEn: "Fashion",     icon: "👗" },
+  { key: "shoes" as BrandCategory,       labelFa: "کفش",       labelEn: "Shoes",       icon: "👟" },
+  { key: "bags" as BrandCategory,        labelFa: "کیف",       labelEn: "Bags",        icon: "👜" },
+  { key: "beauty" as BrandCategory,      labelFa: "زیبایی",    labelEn: "Beauty",      icon: "💄" },
+  { key: "sports" as BrandCategory,      labelFa: "ورزش",      labelEn: "Sports",      icon: "⚽" },
+  { key: "kids" as BrandCategory,        labelFa: "کودک",      labelEn: "Kids",        icon: "🧒" },
+  { key: "electronics" as BrandCategory, labelFa: "الکترونیک", labelEn: "Electronics", icon: "📱" },
+  { key: "home" as BrandCategory,        labelFa: "خانه",      labelEn: "Home",        icon: "🏠" },
+  { key: "accessories" as BrandCategory, labelFa: "اکسسوری",   labelEn: "Accessories", icon: "💍" },
+  { key: "eyewear" as BrandCategory,     labelFa: "عینک",      labelEn: "Eyewear",     icon: "🕶" },
+  { key: "auto" as BrandCategory,        labelFa: "خودرو",     labelEn: "Auto",        icon: "🚗" },
+  { key: "food" as BrandCategory,        labelFa: "غذا",       labelEn: "Food",        icon: "🍕" },
+];
+
+export const turkishBrands: TurkishBrand[] = [
+  { id:"1",  name:"Zara",          nameFa:"زارا",          descFa:"مد روز اروپایی",           descEn:"European fashion",        logo:"https://logo.clearbit.com/zara.com",          url:"https://www.zara.com/tr",         categories:["fashion","bags"],  color:"#1a1a2e", featured:true  },
+  { id:"2",  name:"Mango",         nameFa:"منگو",          descFa:"استایل مدرن",              descEn:"Modern style",            logo:"https://logo.clearbit.com/mango.com",         url:"https://www.mango.com/tr",        categories:["fashion","bags"],  color:"#2d1b69", featured:true  },
+  { id:"3",  name:"H&M",           nameFa:"اچ اند ام",     descFa:"مد مقرون به صرفه",        descEn:"Affordable fashion",      logo:"https://logo.clearbit.com/hm.com",            url:"https://www.hm.com/tr",           categories:["fashion","kids"],  color:"#1a0a2e", featured:true  },
+  { id:"4",  name:"LC Waikiki",    nameFa:"ال سی وایکیکی", descFa:"برند ترکیه ای",           descEn:"Turkish brand",           logo:"https://logo.clearbit.com/lcw.com",           url:"https://www.lcw.com",             categories:["fashion","kids"],  color:"#0a1a3e", featured:true  },
+  { id:"5",  name:"Nike",          nameFa:"نایک",          descFa:"کفش و پوشاک ورزشی",       descEn:"Sports and footwear",     logo:"https://logo.clearbit.com/nike.com",          url:"https://www.nike.com/tr",         categories:["shoes","sports"],  color:"#0a1800", featured:true  },
+  { id:"6",  name:"Adidas",        nameFa:"آدیداس",        descFa:"برند ورزشی جهانی",        descEn:"Global sports brand",     logo:"https://logo.clearbit.com/adidas.com",        url:"https://www.adidas.com.tr",       categories:["shoes","sports"],  color:"#0a0a0a", featured:true  },
+  { id:"7",  name:"Sephora",       nameFa:"سفورا",         descFa:"لوازم آرایشی لوکس",       descEn:"Luxury beauty",           logo:"https://logo.clearbit.com/sephora.com",       url:"https://www.sephora.com.tr",      categories:["beauty"],          color:"#1a0020", featured:true  },
+  { id:"8",  name:"Mavi",          nameFa:"ماوی",          descFa:"دنیم ترکیه ای",           descEn:"Turkish denim",           logo:"https://logo.clearbit.com/mavi.com",          url:"https://www.mavi.com",            categories:["fashion"],         color:"#001a3e", featured:false },
+  { id:"9",  name:"Bershka",       nameFa:"برشکا",         descFa:"مد خیابانی جوان",         descEn:"Youth street fashion",    logo:"https://logo.clearbit.com/bershka.com",       url:"https://www.bershka.com/tr",      categories:["fashion"],         color:"#1a002e", featured:false },
+  { id:"10", name:"Stradivarius",  nameFa:"استرادیواریوس", descFa:"مد زنانه ظریف",           descEn:"Feminine fashion",        logo:"https://logo.clearbit.com/stradivarius.com",  url:"https://www.stradivarius.com/tr", categories:["fashion"],         color:"#1a1a2e", featured:false },
+  { id:"11", name:"Pull&Bear",     nameFa:"پول اند بر",    descFa:"کژوال و راحت",            descEn:"Casual and comfy",        logo:"https://logo.clearbit.com/pullandbear.com",   url:"https://www.pullandbear.com/tr",  categories:["fashion","shoes"], color:"#001a2e", featured:false },
+  { id:"12", name:"Koton",         nameFa:"کوتون",         descFa:"مد روزانه ترکیه ای",      descEn:"Turkish daily fashion",   logo:"https://logo.clearbit.com/koton.com",         url:"https://www.koton.com",           categories:["fashion"],         color:"#1a0a00", featured:false },
+  { id:"13", name:"DeFacto",       nameFa:"دفاکتو",        descFa:"مد خانوادگی",             descEn:"Family fashion",          logo:"https://logo.clearbit.com/defacto.com.tr",    url:"https://www.defacto.com.tr",      categories:["fashion","kids"],  color:"#0a001a", featured:false },
+  { id:"14", name:"Trendyol",      nameFa:"ترندیول",       descFa:"بزرگترین فروشگاه ترکیه", descEn:"Largest Turkish store",   logo:"https://logo.clearbit.com/trendyol.com",      url:"https://www.trendyol.com",        categories:["fashion","bags"],  color:"#2e1a00", featured:false },
+  { id:"15", name:"Massimo Dutti", nameFa:"ماسیمو دوتی",   descFa:"مد لوکس اروپایی",        descEn:"Luxury European fashion", logo:"https://logo.clearbit.com/massimodutti.com",  url:"https://www.massimodutti.com/tr", categories:["fashion"],         color:"#1a1a1a", featured:false },
+];
