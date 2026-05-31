@@ -85,6 +85,7 @@ function BrandLogo({ brand }: { brand: TurkishBrand }) {
           target.style.display = "none";
           const parent = target.parentElement;
           if (parent) {
+            
             parent.style.background = "#1a1a2e";
             parent.innerHTML = `<span style="color:#fff;font-weight:800;font-size:16px;font-family:Sora,sans-serif">${brand.name[0]}</span>`;
           }
