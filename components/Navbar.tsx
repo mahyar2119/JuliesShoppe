@@ -67,7 +67,6 @@ export default function Navbar({ searchValue = "", onSearch, activePage }: Props
   const links = [
     { label: isFa ? "خانه"      : "Home",     href: "/",         key: "home"     },
     { label: isFa ? "برندها"    : "Brands",   href: "/brands",   key: "brands"   },
-    { label: isFa ? "محصولات"   : "Products", href: "/products", key: "products" },
     { label: isFa ? "درباره ما" : "About",    href: "/about",    key: "about"    },
   ];
 
