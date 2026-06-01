@@ -27,6 +27,10 @@ interface Translations {
   footer_sub: string;
   footer_cta: string;
   footer_rights: string;
+  promo_badge: string;
+  promo_title: string;
+  promo_sub: string;
+  promo_cta: string;
   tg_greeting: string;
   tg_product_label: string;
   tg_price_label: string;
@@ -62,6 +66,10 @@ const translations: Record<Lang, Translations> = {
     footer_sub: "فروشگاه مد لوکس",
     footer_cta: "سفارش و پشتیبانی در تلگرام",
     footer_rights: "تمام حقوق محفوظ است © Julie's Shoppe 2025",
+    promo_badge: "پیشنهاد ویژه",
+    promo_title: "تا ۳۰٪ تخفیف روی برندهای منتخب",
+    promo_sub: "همین الان سفارش بده",
+    promo_cta: "سفارش در تلگرام",
     tg_greeting: "سلام، می‌خوام این محصول رو سفارش بدم:",
     tg_product_label: "🛍 محصول",
     tg_price_label: "💰 قیمت نهایی",
@@ -94,6 +102,10 @@ const translations: Record<Lang, Translations> = {
     footer_sub: "Luxury Fashion Store",
     footer_cta: "Order & Support on Telegram",
     footer_rights: "All rights reserved © Julie's Shoppe 2025",
+    promo_badge: "Special Offer",
+    promo_title: "Up to 30% off selected brands",
+    promo_sub: "Order now and save",
+    promo_cta: "Order on Telegram",
     tg_greeting: "Hi, I'd like to order this product:",
     tg_product_label: "🛍 Product",
     tg_price_label: "💰 Final Price",

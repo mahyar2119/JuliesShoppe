@@ -119,3 +119,27 @@ export const turkishBrands: TurkishBrand[] = [
   { id:"14", name:"Trendyol",      nameFa:"ترندیول",       descFa:"بزرگترین فروشگاه ترکیه", descEn:"Largest Turkish store",   logo:"https://logo.clearbit.com/trendyol.com",      url:"https://www.trendyol.com",        categories:["fashion","bags"],  color:"#2e1a00", featured:false },
   { id:"15", name:"Massimo Dutti", nameFa:"ماسیمو دوتی",   descFa:"مد لوکس اروپایی",        descEn:"Luxury European fashion", logo:"https://logo.clearbit.com/massimodutti.com",  url:"https://www.massimodutti.com/tr", categories:["fashion"],         color:"#1a1a1a", featured:false },
 ];
+
+export interface OrderRequest {
+  id: string;
+  name: string;
+  phone: string;
+  product: string;
+  productId: string;
+  size: string;
+  note: string;
+  date: number;
+}
+
+export type SidebarCategory = "all" | "female" | "male" | "children" | "beauty" | "sports" | "shoes" | "bags";
+
+export const SIDEBAR_CATEGORIES: { key: SidebarCategory; labelFa: string; labelEn: string; icon: string }[] = [
+  { key: "all",      labelFa: "همه",      labelEn: "All",      icon: "🛍" },
+  { key: "female",   labelFa: "زنانه",    labelEn: "Women",    icon: "👩" },
+  { key: "male",     labelFa: "مردانه",   labelEn: "Men",      icon: "👨" },
+  { key: "children", labelFa: "بچگانه",   labelEn: "Kids",     icon: "👶" },
+  { key: "beauty",   labelFa: "زیبایی",   labelEn: "Beauty",   icon: "💄" },
+  { key: "sports",   labelFa: "ورزش",     labelEn: "Sports",   icon: "⚽" },
+  { key: "shoes",    labelFa: "کفش",      labelEn: "Shoes",    icon: "👟" },
+  { key: "bags",     labelFa: "کیف",      labelEn: "Bags",     icon: "👜" },
+];

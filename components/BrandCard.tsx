@@ -119,9 +119,6 @@ export default function BrandCard({ brand }: { brand: TurkishBrand }) {
       {/* Logo + badge row */}
       <div className="relative z-10 flex items-start justify-between">
         <BrandLogo brand={brand} />
-        {brand.badge && (
-          <span className="badge badge-accent" style={ff}>{brand.badge}</span>
-        )}
       </div>
 
       {/* Text */}

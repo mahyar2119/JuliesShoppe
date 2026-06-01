@@ -26,7 +26,7 @@ export default function OrderModal({
   onClose,
 }: Props) {
   const { lang, dir } = useLang();
-  const { saveOrder }  = useStore();
+  
   const ff   = { fontFamily: lang === "fa" ? "Vazirmatn,sans-serif" : "Sora,sans-serif" };
   const isFa = lang === "fa";
 
@@ -59,7 +59,7 @@ export default function OrderModal({
       id: Date.now().toString(), name: name.trim(), phone: phone.trim(),
       product: `${brand} — ${type}`, productId, size, note: specs.trim(), date: Date.now(),
     };
-    saveOrder(order);
+    
     setStep("success");
   };
 

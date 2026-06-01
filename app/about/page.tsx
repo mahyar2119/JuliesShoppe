@@ -19,7 +19,7 @@ export default function AboutPage() {
 
   return (
     <main style={{ minHeight: "100vh", background: "transparent" }} dir={dir}>
-      <Navbar activePage="about" />
+      <Navbar />
 
       {/* Full-page backdrop */}
       <div style={{
