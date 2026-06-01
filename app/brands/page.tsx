@@ -8,7 +8,7 @@ export default function BrandsPage() {
   const [search, setSearch] = useState("");
   return (
     <main style={{ minHeight: "100vh" }}>
-      <Navbar />
+      <Navbar searchValue={search} onSearch={setSearch} activePage="brands" />
       <div className="pt-16"><BrandsSection search={search} /></div>
       <Footer />
     </main>

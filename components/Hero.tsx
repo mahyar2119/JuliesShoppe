@@ -1,90 +1,131 @@
 "use client";
-import { Send, ChevronDown, Sparkles } from "lucide-react";
-import { TELEGRAM_USERNAME } from "@/lib/store";
+import { ChevronDown, ShoppingBag } from "lucide-react";
 import { useLang } from "@/lib/lang";
-import { useStore } from "@/lib/context";
 import Image from "next/image";
+import Link from "next/link";
 
-const TICKER = ["ZARA","MANGO","NIKE","ADIDAS","TRENDYOL","H&M","LC WAİKİKİ","SEPHORA","MAVİ","STRADIVARIUS","BERSHKA","PULL&BEAR","KOTON","DeFACTO"];
+const BRANDS = ["ZARA","MANGO","NIKE","ADIDAS","H&M","TRENDYOL","LC WAİKİKİ","SEPHORA","MAVİ","BERSHKA","PULL&BEAR","KOTON","DeFACTO","MASSIMO DUTTI","DECATHLON","MEDIA MARKT","IKEA","PUMA","REEBOK","SKECHERS"];
 
-export default function Hero() {
-  const { t, lang, dir } = useLang();
-  const { heroVideoUrl } = useStore();
-  const ff = { fontFamily: lang==="fa"?"Vazirmatn,sans-serif":"DM Sans,sans-serif" };
+const GRID = [
+  { name:"Zara",       color:"#1a1a1a", emoji:"👗" },
+  { name:"Nike",       color:"#111",    emoji:"👟" },
+  { name:"IKEA",       color:"#0051ba", emoji:"🛋️" },
+  { name:"Sephora",    color:"#1a001a", emoji:"💄" },
+  { name:"Adidas",     color:"#000",    emoji:"⚽" },
+  { name:"MediaMarkt", color:"#cc0000", emoji:"📱" },
+  { name:"Trendyol",   color:"#f27a1a", emoji:"🛍️" },
+  { name:"Decathlon",  color:"#007dbc", emoji:"🏋️" },
+  { name:"Mango",      color:"#5c2d0a", emoji:"👜" },
+];
+
+interface Props { onOrder?: () => void; }
+
+export default function Hero({ onOrder }: Props) {
+  const { lang, dir } = useLang();
+  const ff   = { fontFamily: lang === "fa" ? "Vazirmatn,sans-serif" : "DM Sans,sans-serif" };
+  const isFa = lang === "fa";
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
+    <section className="relative overflow-hidden pt-16" style={{ minHeight:"100vh", display:"flex", flexDirection:"column" }}>
 
-      {/* ── BACKGROUND VIDEO ── */}
-      <div className="absolute inset-0 z-0">
-        <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-25"
-          src={heroVideoUrl} />
-        <div className="absolute inset-0" style={{ background:"linear-gradient(to bottom, var(--bg)/70 0%, transparent 40%, var(--bg)/90 80%, var(--bg) 100%)" }} />
-        {/* Colour blobs */}
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full blur-[100px] opacity-20"
-          style={{ background:"var(--blue)", animation:"float 7s ease-in-out infinite" }} />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full blur-[80px] opacity-15"
-          style={{ background:"var(--purple)", animation:"float 9s ease-in-out infinite reverse" }} />
-      </div>
+      {/* Blobs */}
+      <div className="blob" style={{ width:650, height:650, background:"rgba(255,230,120,0.42)", top:"-15%", left:"-18%", animation:"floatY 12s ease-in-out infinite" }} />
+      <div className="blob" style={{ width:500, height:500, background:"rgba(200,218,255,0.38)", top:"8%", right:"-12%", animation:"floatY 14s ease-in-out infinite reverse" }} />
+      <div className="blob" style={{ width:380, height:380, background:"rgba(255,210,140,0.28)", bottom:"8%", left:"28%", animation:"floatY 16s ease-in-out infinite" }} />
 
-      {/* ── TICKER ── */}
-      <div className="absolute top-16 inset-x-0 overflow-hidden z-10 py-2.5 glass"
-        style={{ borderLeft:"none", borderRight:"none", borderRadius:0 }}>
-        <div className="marquee-inner flex gap-10 whitespace-nowrap w-max">
-          {[...TICKER,...TICKER].map((b,i)=>(
-            <span key={i} className="text-[10px] tracking-[0.35em] font-bold"
-              style={{ color: i%3===0?"var(--blue)":i%3===1?"var(--purple)":"var(--text3)" }}>{b}</span>
+      {/* Ticker */}
+      <div className="overflow-hidden py-2.5 shrink-0 relative z-10"
+        style={{ background:"rgba(255,255,255,0.38)", backdropFilter:"blur(14px)", WebkitBackdropFilter:"blur(14px)", borderBottom:"1px solid rgba(255,255,255,0.72)", borderTop:"1px solid rgba(255,255,255,0.72)" }}>
+        <div className="marquee-inner">
+          {[...BRANDS,...BRANDS].map((b,i) => (
+            <span key={i} className="mx-8 text-[9px] font-black tracking-[0.45em] shrink-0"
+              style={{ color: i%3===0 ? "var(--gold)" : i%3===1 ? "rgba(27,29,56,0.38)" : "rgba(150,138,120,0.45)" }}>
+              {b}
+            </span>
           ))}
         </div>
       </div>
 
-      {/* ── CONTENT ── */}
-      <div className="relative z-10 text-center px-4 max-w-3xl mx-auto fade-up" dir={dir}>
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 glass"
-          style={{ color:"var(--blue)" }}>
-          <Sparkles size={12}/>
-          <span className="text-[10px] font-bold tracking-widest uppercase" style={ff}>{t.hero_badge}</span>
-        </div>
+      {/* Main */}
+      <div className="flex-1 flex items-center relative z-10">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 w-full grid md:grid-cols-2 gap-12 xl:gap-20 items-center" dir={dir}>
 
-        {/* Logo */}
-        <div className="flex justify-center mb-8 float">
-          <Image src="/logo.png" alt="Julie's Shoppe" width={280} height={70} className="object-contain"
-            style={{ filter:"drop-shadow(0 0 40px rgba(79,124,255,0.5)) drop-shadow(0 0 80px rgba(155,92,255,0.3))" }}/>
-        </div>
-
-        <p className="text-base md:text-lg mb-10 leading-relaxed" style={{ ...ff, color:"var(--text2)" }}>
-          {t.hero_sub}
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="#products" className="gradient-btn px-8 py-3.5 rounded-xl font-bold text-sm text-white glow-blue" style={ff}>
-            {t.hero_browse}
-          </a>
-          <a href={`https://t.me/${TELEGRAM_USERNAME}`} target="_blank" rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm transition-all hover:scale-105 glass"
-            style={{ ...ff, color:"var(--purple)", border:"1px solid var(--purple)" }}>
-            <Send size={14}/>{t.hero_contact}
-          </a>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-3 gap-4 md:gap-10 max-w-lg mx-auto">
-          {[
-            { n:"15+",  l: lang==="fa"?"برند ترکیه":"Turkish Brands" },
-            { n:"+15%", l: lang==="fa"?"سود شفاف":"Transparent Markup" },
-            { n:"24/7", l: lang==="fa"?"پشتیبانی":"Support" },
-          ].map((s,i)=>(
-            <div key={i} className="glass rounded-xl p-3 text-center">
-              <p className="text-2xl font-bold gradient-text">{s.n}</p>
-              <p className="text-[11px] mt-1 opacity-50" style={ff}>{s.l}</p>
+          {/* Left */}
+          <div className="fade-up">
+            <div className="mb-8">
+              <Image src="/logo.png" alt="Julie's Shoppe" width={600} height={150}
+                style={{ filter:"invert(1) brightness(0.08)", objectFit:"contain" }} priority />
             </div>
-          ))}
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+              style={{ background:"rgba(255,255,255,0.68)", border:"1px solid rgba(197,144,10,0.32)", backdropFilter:"blur(14px)" }}>
+              <span className="w-2 h-2 rounded-full" style={{ background:"var(--gold)" }} />
+              <span className="text-[10px] font-bold tracking-[0.32em] uppercase" style={{ color:"var(--gold)", ...ff }}>
+                {isFa ? "خرید مستقیم از ترکیه" : "Direct from Turkey"}
+              </span>
+            </div>
+
+            <h1 className="serif leading-tight mb-6" style={{ fontSize:"clamp(2.4rem,5vw,3.6rem)", color:"var(--ink)", fontWeight:700, letterSpacing:"-0.02em" }}>
+              {isFa
+                ? <>{"بهترین برندهای جهان"}<br /><span style={{ color:"var(--gold)" }}>{"از ترکیه، به ایران"}</span></>
+                : <>{"World's Best Brands"}<br /><span style={{ color:"var(--gold)" }}>{"Turkey to Iran"}</span></>
+              }
+            </h1>
+
+            <p className="text-sm leading-relaxed mb-10" style={{ ...ff, color:"var(--ink-2)", maxWidth:"420px", lineHeight:"1.9" }}>
+              {isFa
+                ? "پوشاک، کفش، الکترونیک، لوازم خانگی، ورزش، آرایشی، عینک، لوازم خودرو — هر آنچه در ترکیه است با ارسال سریع به سراسر ایران"
+                : "Fashion, shoes, electronics, home, sports, beauty, eyewear, auto accessories — everything Turkey has, delivered fast to Iran"}
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              <Link href="/brands" className="btn-gold" style={ff}>
+                {isFa ? "مشاهده همه برندها" : "Browse All Brands"}
+              </Link>
+              <button onClick={onOrder} className="btn-glass" style={ff}>
+                <ShoppingBag size={14} />
+                {isFa ? "ثبت سفارش" : "Place an Order"}
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div className="mt-12 flex gap-10 flex-wrap">
+              {[
+                { n:"45+",  l: isFa ? "برند ترکی"     : "Turkish Brands"    },
+                { n:"24/7", l: isFa ? "پشتیبانی"       : "Support"           },
+                { n:"15%",  l: isFa ? "کارمزد شفاف"   : "Transparent Fee"   },
+              ].map((s,i) => (
+                <div key={i}>
+                  <p className="text-2xl font-black serif" style={{ color:"var(--ink)" }}>{s.n}</p>
+                  <p className="text-xs mt-1" style={{ ...ff, color:"var(--ink-3)" }}>{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: brand grid */}
+          <div className="hidden md:grid grid-cols-3 gap-3 fade-up" style={{ animationDelay:"0.15s" }}>
+            {GRID.map((b,i) => (
+              <div key={i}
+                className="glass-card rounded-2xl aspect-square flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:-translate-y-2 hover:bg-[rgba(16,14,10,0.85)] group cursor-default"
+                style={{ animationDelay:`${0.05*i}s`, position:"relative", overflow:"hidden" }}>
+                <div className="shine-top" />
+                <span style={{ fontSize:"26px" }}>{b.emoji}</span>
+                <span className="text-[9px] font-black tracking-widest uppercase transition-colors duration-300"
+                  style={{ color: b.color }}>{b.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce opacity-40">
-        <ChevronDown size={22} style={{ color:"var(--text2)" }}/>
+      {/* Scroll */}
+      <div className="text-center pb-8 relative z-10 opacity-25 animate-bounce">
+        <ChevronDown size={20} style={{ color:"var(--ink-3)", margin:"0 auto" }} />
       </div>
+
+      <div className="absolute bottom-0 inset-x-0 h-20 pointer-events-none"
+        style={{ background:"linear-gradient(to bottom, transparent, rgba(244,242,238,0.55))" }} />
     </section>
   );
 }
